@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tattitude Manchester Ltd | Professional Tattoo & Piercing</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --neon-blue: #00f2ff;
+            --neon-pink: #ff00ea;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --neon-shadow-blue: 0 0 10px rgba(0, 242, 255, 0.7), 0 0 20px rgba(0, 242, 255, 0.4);
+            --neon-shadow-pink: 0 0 10px rgba(255, 0, 234, 0.7), 0 0 20px rgba(255, 0, 234, 0.4);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .nav-link {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Optimized Loader --- */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--darker-bg);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+        .scanner-container {
+            text-align: center;
+        }
+        .scanner {
+            width: 200px;
+            height: 3px;
+            background: var(--neon-blue);
+            box-shadow: var(--neon-shadow-blue);
+            margin: 0 auto;
+            animation: scan 1.5s infinite ease-in-out;
+        }
+        @keyframes scan {
+            0%, 100% { transform: translateY(-30px); opacity: 0.2; }
+            50% { transform: translateY(30px); opacity: 1; }
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            background: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.3);
+            padding: 1rem 0;
+            transition: all 0.3s;
+        }
+        .navbar-brand {
+            color: var(--neon-pink) !important;
+            font-weight: 700;
+            text-shadow: var(--neon-shadow-pink);
+        }
+        .nav-link {
+            color: #fff !important;
+            margin: 0 10px;
+            font-size: 0.9rem;
+            position: relative;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--neon-blue) !important;
+            text-shadow: var(--neon-shadow-blue);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px; bottom: 0; left: 0;
+            background: var(--neon-blue);
+            transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* --- Global Neon Components --- */
+        .btn-neon-blue {
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            background: transparent;
+            padding: 10px 25px;
+            border-radius: 0;
+            font-weight: bold;
+            transition: 0.4s;
+            text-transform: uppercase;
+        }
+        .btn-neon-blue:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: var(--neon-shadow-blue);
+        }
+
+        .btn-neon-pink {
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            background: transparent;
+            padding: 10px 25px;
+            border-radius: 0;
+            font-weight: bold;
+            transition: 0.4s;
+            text-transform: uppercase;
+        }
+        .btn-neon-pink:hover {
+            background: var(--neon-pink);
+            color: #fff;
+            box-shadow: var(--neon-shadow-pink);
+        }
+
+        .neon-border-box {
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            background: var(--glass-bg);
+            padding: 2rem;
+            position: relative;
+            transition: 0.3s;
+        }
+        .neon-border-box:hover {
+            border-color: var(--neon-blue);
+            box-shadow: var(--neon-shadow-blue);
+            transform: translateY(-5px);
+        }
+
+        /* --- Sections Visibility --- */
+        .page-content {
+            display: none;
+            min-height: 80vh;
+            padding-top: 80px;
+        }
+        .page-content.active {
+            display: block;
+            animation: fastFadeIn 0.5s ease-out forwards;
+        }
+        @keyframes fastFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Hero --- */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1590210315325-d41fd141884e?q=80&w=2071&auto=format&fit=crop') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: -80px;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: #fff;
+            text-shadow: var(--neon-shadow-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Carousel --- */
+        .carousel-item img {
+            height: 450px;
+            object-fit: cover;
+            filter: grayscale(30%) brightness(70%);
+        }
+        .carousel {
+            border: 2px solid var(--neon-pink);
+            box-shadow: var(--neon-shadow-pink);
+        }
+
+        /* --- Artists & Cards --- */
+        .artist-card {
+            overflow: hidden;
+            position: relative;
+            border: none;
+            background: #111;
+        }
+        .artist-img {
+            transition: 0.5s;
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+        .artist-card:hover .artist-img {
+            transform: scale(1.05);
+            filter: brightness(40%);
+        }
+        .artist-info {
+            position: absolute;
+            bottom: -100%;
+            left: 0; width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(255, 0, 234, 0.9));
+            transition: 0.4s ease;
+        }
+        .artist-card:hover .artist-info {
+            bottom: 0;
+        }
+
+        /* --- Gallery --- */
+        .gallery-item {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .gallery-item img {
+            width: 100%;
+            transition: 0.3s;
+            display: block;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--darker-bg);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid var(--neon-pink);
+            margin-top: 4rem;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-right: 15px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            color: var(--neon-pink);
+            transform: translateY(-3px);
+            text-shadow: var(--neon-shadow-pink);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--neon-blue); }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        #lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            border: 1px solid var(--neon-blue);
+            box-shadow: var(--neon-shadow-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Optimized Loader -->
+    <div id="loader">
+        <div class="scanner-container">
+            <h2 class="text-white mb-3" style="letter-spacing: 5px;">TATTITUDE</h2>
+            <div class="scanner"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showPage('home')">TATTITUDE <span style="color:white">MCR</span></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" data-page="home" href="#" onclick="showPage('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="about" href="#" onclick="showPage('about')">About</a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="services" href="#" onclick="showPage('services')">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="artists" href="#" onclick="showPage('artists')">Artists</a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="gallery" href="#" onclick="showPage('gallery')">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="reviews" href="#" onclick="showPage('reviews')">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="contact" href="#" onclick="showPage('contact')">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE: HOME -->
+    <div id="home" class="page-content active">
+        <section id="hero">
+            <div class="container">
+                <h1 class="hero-title animate__animated animate__fadeIn">Tattitude Manchester Ltd</h1>
+                <p class="lead mb-4 animate__animated animate__fadeIn">Professional Tattoos & Body Piercing in the heart of Manchester</p>
+                <div>
+                    <button class="btn btn-neon-blue me-3" onclick="showPage('contact')">Book Appointment</button>
+                    <button class="btn btn-neon-pink" onclick="showPage('gallery')">View Portfolio</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container py-4">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4">
+                        <h2 class="text-neon-pink mb-4">25 Years of Excellence</h2>
+                        <p class="text-secondary">Since 1999, we've been pushing the boundaries of body art in Manchester. Our studio combines a sterile, professional environment with raw urban creativity.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-neon-blue me-2"></i> Award Winning Artists</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-neon-blue me-2"></i> Highest Hygiene Standards</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-neon-blue me-2"></i> Custom Designs Only</li>
+                        </ul>
+                        <button class="btn btn-neon-blue mt-3" onclick="showPage('about')">Our History</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="https://images.unsplash.com/photo-1598136490941-30d885318abd?q=80&w=2069&auto=format&fit=crop" class="d-block w-100" alt="Studio">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=2072&auto=format&fit=crop" class="d-block w-100" alt="Work">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: ABOUT -->
+    <div id="about" class="page-content">
+        <div class="container">
+            <h2 class="text-center mb-5">About <span class="text-neon-blue">Us</span></h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <p class="fs-4 mb-5">Tattitude Manchester Ltd is more than just a tattoo shop; it's a legacy. Located at Church St, M4 1PE, we have spent over two and a half decades perfecting the art of skin decoration.</p>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="neon-border-box h-100">
+                                <i class="fas fa-scroll fa-2x mb-3 text-neon-pink"></i>
+                                <h4>History</h4>
+                                <p class="small">25+ years serving the Manchester community.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="neon-border-box h-100">
+                                <i class="fas fa-user-friends fa-2x mb-3 text-neon-blue"></i>
+                                <h4>Team</h4>
+                                <p class="small">Specialized artists for every unique style.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="neon-border-box h-100">
+                                <i class="fas fa-shield-alt fa-2x mb-3 text-neon-pink"></i>
+                                <h4>Safety</h4>
+                                <p class="small">Licensed and inspected by UK health authorities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: SERVICES -->
+    <div id="services" class="page-content">
+        <div class="container">
+            <h2 class="text-center mb-5">Our <span class="text-neon-pink">Services</span></h2>
+            <div class="row g-4 mb-5">
+                <h3 class="text-neon-blue mb-4"><i class="fas fa-paint-brush me-2"></i> Tattoo Artistry</h3>
+                <div class="col-md-4">
+                    <div class="neon-border-box h-100">
+                        <h5>Custom Designs</h5>
+                        <p class="text-secondary small">Unique artwork tailored specifically to your story and body contours.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="neon-border-box h-100">
+                        <h5>Realism & Portraits</h5>
+                        <p class="text-secondary small">Photorealistic masterpieces capturing every minute detail.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="neon-border-box h-100">
+                        <h5>Traditional & Neo</h5>
+                        <p class="text-secondary small">Bold lines and vibrant colors that stand the test of time.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <h3 class="text-neon-pink mb-4"><i class="fas fa-ring me-2"></i> Professional Piercing</h3>
+                <div class="col-6 col-md-3">
+                    <div class="neon-border-box text-center p-3">
+                        <p class="mb-0">Ear Piercing</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="neon-border-box text-center p-3">
+                        <p class="mb-0">Nose & Septum</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="neon-border-box text-center p-3">
+                        <p class="mb-0">Lip & Oral</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="neon-border-box text-center p-3">
+                        <p class="mb-0">Exotic Body</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: ARTISTS -->
+    <div id="artists" class="page-content">
+        <div class="container">
+            <h2 class="text-center mb-5">The <span class="text-neon-blue">Artists</span></h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1560707303-4e980ce876ad?q=80&w=1932&auto=format&fit=crop" class="artist-img" alt="Artist">
+                        <div class="artist-info">
+                            <h4>Jax Miller</h4>
+                            <p class="small">Realism Master</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=2080&auto=format&fit=crop" class="artist-img" alt="Artist">
+                        <div class="artist-info">
+                            <h4>Luna Grey</h4>
+                            <p class="small">Fineline Specialist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1974&auto=format&fit=crop" class="artist-img" alt="Artist">
+                        <div class="artist-info">
+                            <h4>Mace 'Old Skool'</h4>
+                            <p class="small">Traditional King</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=1974&auto=format&fit=crop" class="artist-img" alt="Artist">
+                        <div class="artist-info">
+                            <h4>Sia Noir</h4>
+                            <p class="small">Blackwork Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: GALLERY -->
+    <div id="gallery" class="page-content">
+        <div class="container">
+            <h2 class="text-center mb-4">Our <span class="text-neon-pink">Gallery</span></h2>
+            <div class="text-center mb-4">
+                <button class="btn btn-sm btn-neon-blue mx-1 filter-btn active" onclick="filterGallery('all')">All</button>
+                <button class="btn btn-sm btn-neon-blue mx-1 filter-btn" onclick="filterGallery('tattoo')">Tattoos</button>
+                <button class="btn btn-sm btn-neon-blue mx-1 filter-btn" onclick="filterGallery('piercing')">Piercings</button>
+            </div>
+            <div class="row" id="gallery-container">
+                <div class="col-md-4 gallery-item tattoo">
+                    <img src="https://images.unsplash.com/photo-1550537687-c91072c4792d?q=80&w=1974&auto=format&fit=crop" onclick="openLightbox(this.src)" loading="lazy">
+                </div>
+                <div class="col-md-4 gallery-item tattoo">
+                    <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=1974&auto=format&fit=crop" onclick="openLightbox(this.src)" loading="lazy">
+                </div>
+                <div class="col-md-4 gallery-item piercing">
+                    <img src="https://images.unsplash.com/photo-1629193475242-70f9012a6745?q=80&w=1974&auto=format&fit=crop" onclick="openLightbox(this.src)" loading="lazy">
+                </div>
+                <div class="col-md-4 gallery-item tattoo">
+                    <img src="https://images.unsplash.com/photo-1598136490937-f77b0ce500fe?q=80&w=2069&auto=format&fit=crop" onclick="openLightbox(this.src)" loading="lazy">
+                </div>
+                <div class="col-md-4 gallery-item piercing">
+                    <img src="https://images.unsplash.com/photo-1596938927623-289456259074?q=80&w=1974&auto=format&fit=crop" onclick="openLightbox(this.src)" loading="lazy">
+                </div>
+                <div class="col-md-4 gallery-item tattoo">
+                    <img src="https://images.unsplash.com/photo-1590210315325-d41fd141884e?q=80&w=2071&auto=format&fit=crop" onclick="openLightbox(this.src)" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: REVIEWS -->
+    <div id="reviews" class="page-content">
+        <div class="container text-center">
+            <h2 class="mb-5">Client <span class="text-neon-blue">Voice</span></h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="neon-border-box p-4 p-md-5">
+                                    <div class="text-warning mb-3 small">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="fs-5 italic">"Brilliant quality tattoos, lovely staff, and decent prices. Won't go anywhere else."</p>
+                                    <h6 class="text-neon-pink">- Sarah J.</h6>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="neon-border-box p-4 p-md-5">
+                                    <div class="text-warning mb-3 small">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="fs-5 italic">"Did a walk-in today and couldn't be happier. Atmosphere is 10/10."</p>
+                                    <h6 class="text-neon-pink">- Mike R.</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: CONTACT -->
+    <div id="contact" class="page-content">
+        <div class="container">
+            <h2 class="text-center mb-5">Get <span class="text-neon-pink">Inked</span></h2>
+            <div class="row g-4">
+                <div class="col-md-5">
+                    <div class="neon-border-box mb-4">
+                        <h4>Info</h4>
+                        <p class="small mb-2"><i class="fas fa-phone text-neon-blue me-2"></i> +44 7966 709091</p>
+                        <p class="small mb-2"><i class="fas fa-map-marker-alt text-neon-blue me-2"></i> Church St, Manchester M4 1PE</p>
+                        <p class="small mb-0"><i class="fas fa-clock text-neon-blue me-2"></i> Open Daily - Closes 6 PM</p>
+                    </div>
+                    <div class="ratio ratio-4x3 rounded overflow-hidden">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.225547477543!2d-2.2393322234509467!3d53.482329864273824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bb1b8da35c43d%3A0xc665191319736f98!2sTattitude!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <form class="neon-border-box" onsubmit="event.preventDefault(); alert('Message sent!');">
+                        <div class="mb-3">
+                            <label class="form-label small">Name</label>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small">Email</label>
+                            <input type="email" class="form-control bg-dark text-white border-secondary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small">Message</label>
+                            <textarea class="form-control bg-dark text-white border-secondary" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-neon-pink w-100">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <h6 class="text-neon-blue">TATTITUDE MCR</h6>
+                    <p class="text-secondary small">Est. 1999. Manchester's premier studio.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-neon-pink">SOCIAL</h6>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-neon-blue">LOCATION</h6>
+                    <p class="text-secondary small">Church St, M4 1PE</p>
+                </div>
+            </div>
+            <p class="mb-0 text-secondary small">&copy; 2026 Tattitude Manchester Ltd</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Reduced loader delay for better UX
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            // Allow 600ms for branding then hide
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 600);
+        });
+
+        // Optimized Multi-page logic
+        function showPage(pageId) {
+            // Update Navigation link state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if(link.dataset.page === pageId) link.classList.add('active');
+            });
+
+            // Switch visibility
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            const activePage = document.getElementById(pageId);
+            if(activePage) {
+                activePage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
+
+            // Collapse Bootstrap Navbar
+            const menu = document.getElementById('navbarNav');
+            if(menu.classList.contains('show')) {
+                const bCollapse = bootstrap.Collapse.getInstance(menu);
+                if(bCollapse) bCollapse.hide();
+                else new bootstrap.Collapse(menu).hide();
+            }
+        }
+
+        // Fast filtering
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                item.style.display = (category === 'all' || item.classList.contains(category)) ? 'block' : 'none';
+            });
+        }
+
+        // Lightbox
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.style.display = 'flex';
+        }
+
+        // Optimized Scroll Effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                nav.style.padding = "0.5rem 0";
+                nav.style.backgroundColor = "rgba(5, 5, 5, 0.98)";
+            } else {
+                nav.style.padding = "1rem 0";
+                nav.style.backgroundColor = "rgba(10, 10, 10, 0.95)";
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
